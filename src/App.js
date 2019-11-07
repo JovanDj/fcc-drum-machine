@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-
+import Pad from "./components/Pad";
 class App extends Component {
   pads = [
     {
@@ -56,40 +56,24 @@ class App extends Component {
   }
 
   state = {
-    display: "Drum machine"
+    display: "Drum machine",
+    pads: this.pads
   };
 
   handleClick = () => {
-    console.log("Playing", this.audioRef.current);
     this.audioRef.current.play();
-    this.audioRef.current.currentTime = 0;
   };
   render() {
     return (
-      <div className="container" id="drum-machine">
-        <h1 id="display">{this.state.display}</h1>
+      <React.StrictMode>
+        <div className="container" id="drum-machine">
+          <h1 id="display">{this.state.display}</h1>
 
-        {this.pads.map(pad => {
-          return (
-            <button
-              key={pad.id}
-              className="drum-pad p-3 m-3"
-              id={pad.id}
-              onClick={this.handleClick}
-            >
-              <h1>{pad.letter}</h1>
-              <audio
-                ref={this.audioRef}
-                className="clip"
-                id={pad.letter}
-                src={pad.src}
-              >
-                Audio not available
-              </audio>
-            </button>
-          );
-        })}
-      </div>
+          {this.state.pads.map(pad => {
+            return <Pad pad={pad} onHandleClick={this.handleClick} />;
+          })}
+        </div>
+      </React.StrictMode>
     );
   }
 }
