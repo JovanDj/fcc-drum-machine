@@ -2,6 +2,7 @@
   "name": "fcc-drum-machine",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://jovandj.github.io/fcc-drum-machine",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "react": "^16.11.0",
@@ -28,5 +29,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }

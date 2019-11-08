@@ -69,7 +69,7 @@ class App extends Component {
       <React.StrictMode>
         <div className="container" id="drum-machine">
           <h1 id="display">{this.state.display}</h1>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between bg-light ">
             {this.state.pads.map(pad => {
               return (
                 <Pad
