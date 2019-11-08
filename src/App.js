@@ -42,36 +42,45 @@ class App extends Component {
       id: "drum hit",
       letter: "X",
       src: "http://www.masterbits.de/sc_docu/sounds1/1TM00013.MP3"
+    },
+    {
+      id: "laser",
+      letter: "C",
+      src: "http://www.sa-matra.net/sounds/starcontrol/Umgah-Backzip.wav"
     }
-    // {
-    //   id: "laser",
-    //   letter: "C",
-    //   src: "http://www.sa-matra.net/sounds/starcontrol/Umgah-Backzip.wav"
-    // }
   ];
-
-  constructor() {
-    super();
-    this.audioRef = React.createRef();
-  }
 
   state = {
     display: "Drum machine",
     pads: this.pads
   };
 
-  handleClick = ref => {
-    ref.current.play();
+  handleDisplay = display => {
+    this.setState({ display });
   };
+
+  handleClick = (ref, pad) => {
+    this.handleDisplay(pad);
+    ref.play();
+  };
+
   render() {
     return (
       <React.StrictMode>
         <div className="container" id="drum-machine">
           <h1 id="display">{this.state.display}</h1>
-
-          {this.state.pads.map(pad => {
-            return <Pad pad={pad} onHandleClick={this.handleClick} />;
-          })}
+          <div className="d-flex justify-content-between">
+            {this.state.pads.map(pad => {
+              return (
+                <Pad
+                  onHandleDisplay={this.handleDisplay}
+                  key={pad.id}
+                  pad={pad}
+                  onHandleClick={this.handleClick}
+                />
+              );
+            })}
+          </div>
         </div>
       </React.StrictMode>
     );

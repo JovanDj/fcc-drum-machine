@@ -1,26 +1,48 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Pad = props => {
-  const audioRef = React.useRef();
-  return (
-    <button
-      key={props.pad.id}
-      className="drum-props.pad p-3 m-3"
-      id={props.pad.id}
-      type="button"
-      onClick={() => props.onHandleClick(audioRef)}
-    >
-      <h1>{props.pad.letter}</h1>
-      <audio
-        ref={audioRef}
-        className="clip"
-        id={props.pad.letter}
-        src={props.pad.src}
+class Pad extends Component {
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeydown);
+  }
+
+  handleKeydown = e => {
+    if (e.keyCode === this.props.pad.letter.charCodeAt()) {
+      this.audioRef.play();
+      this.props.onHandleDisplay(this.props.pad.id);
+    }
+  };
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <button
+        letter={this.props.pad.letter}
+        className="drum-pad btn-outline-primary btn-lg p-4"
+        id={this.props.pad.id}
+        type="button"
+        onClick={() =>
+          this.props.onHandleClick(this.audioRef, this.props.pad.id)
+        }
       >
-        Audio not available
-      </audio>
-    </button>
-  );
-};
+        {this.props.pad.letter}
+        <audio
+          ref={ref => (this.audioRef = ref)}
+          className="clip"
+          id={this.props.pad.letter}
+          src={this.props.pad.src}
+        >
+          Audio not available
+        </audio>
+      </button>
+    );
+  }
+}
 
 export default Pad;
