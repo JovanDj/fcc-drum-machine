@@ -42,12 +42,12 @@ class App extends Component {
       id: "drum hit",
       letter: "X",
       src: "http://www.masterbits.de/sc_docu/sounds1/1TM00013.MP3"
-    },
-    {
-      id: "laser",
-      letter: "C",
-      src: "http://www.sa-matra.net/sounds/starcontrol/Umgah-Backzip.wav"
     }
+    // {
+    //   id: "laser",
+    //   letter: "C",
+    //   src: "http://www.sa-matra.net/sounds/starcontrol/Umgah-Backzip.wav"
+    // }
   ];
 
   constructor() {
@@ -60,8 +60,8 @@ class App extends Component {
     pads: this.pads
   };
 
-  handleClick = () => {
-    this.audioRef.current.play();
+  handleClick = ref => {
+    ref.current.play();
   };
   render() {
     return (
